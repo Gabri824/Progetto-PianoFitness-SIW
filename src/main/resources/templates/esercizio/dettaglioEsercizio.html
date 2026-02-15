@@ -18,7 +18,7 @@
         <div class="detail-header">
             <h1 class="detail-title" th:text="${esercizio.nome}">Nome Esercizio</h1>
 
-            <!-- Back Button Logic -->
+            <!-- Torna alla Scheda o Esercizi Button  -->
             <a th:if="${provenienza == 'scheda' && schedaId != null}" th:href="@{'/scheda/' + ${schedaId}}"
                 class="btn-nav-back">
                 Torna alla Scheda
@@ -29,7 +29,7 @@
             </a>
         </div>
 
-        <!-- Detail Card -->
+        <!-- Dettagli Esercizio -->
         <div class="detail-card">
 
             <div class="detail-info">
@@ -50,7 +50,7 @@
                     </p>
                 </div>
 
-                <!-- Admin Action Buttons -->
+                <!-- Azioni Admin Buttons -->
                 <div sec:authorize="hasAuthority('ADMIN')" class="admin-actions">
                     <a th:href="@{'/esercizio/edit/' + ${esercizio.id}}" class="btn-action btn-edit">Modifica</a>
                     <a th:href="@{'/esercizio/delete/' + ${esercizio.id}}" class="btn-action btn-delete"

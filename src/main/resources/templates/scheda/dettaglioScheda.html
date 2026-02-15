@@ -16,12 +16,10 @@
         <!-- Header -->
         <div class="detail-header">
             <h1 class="detail-title" th:text="${scheda.titolo}">Titolo Scheda</h1>
-            <!-- Back Button linked to list -->
-            <!-- Back Button linked to list -->
             <a th:href="@{/schede}" class="btn-nav-back">Torna all'Elenco</a>
         </div>
 
-        <!-- Detail Card -->
+        <!-- Dettagli Scheda -->
         <div class="detail-card">
 
             <div class="detail-info">
@@ -43,7 +41,7 @@
                     </p>
                 </div>
 
-                <!-- Admin/Owner Action Buttons -->
+                <!-- Azioni Admin/Proprietario -->
                 <div th:if="${canEdit}" class="scheda-actions">
                     <a th:href="@{'/schede/edit/' + ${scheda.id}}" class="btn-action btn-edit">Modifica Scheda</a>
                     <a th:href="@{'/schede/delete/' + ${scheda.id}}" class="btn-action btn-delete"
@@ -51,7 +49,7 @@
                 </div>
             </div>
 
-            <!-- Content of the Scheda (Exercises grouped by Day) -->
+            <!-- Contenuto della Scheda (Esercizi raggruppati per Giorno) -->
             <div class="scheda-content">
                 <h2 class="section-heading">Programma di Allenamento</h2>
 
@@ -135,7 +133,7 @@
 
         </div>
 
-        <!-- Recensioni Section (Instructor/Admin) -->
+        <!-- Sezione Recensioni (Istruttori/Admin) -->
         <div class="detail-card" style="margin-top: 30px;">
             <div class="detail-header"
                 style="border-bottom: 2px solid var(--accent-green); padding-bottom: 15px; margin-bottom: 20px;">

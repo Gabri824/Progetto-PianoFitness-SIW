@@ -12,7 +12,7 @@
     <div id="top" th:replace="~{fragments/navbar :: navbar}"></div>
 
     <div class="container">
-        <!-- Header & Search -->
+        <!-- Header & Ricerca -->
         <div class="page-header">
             <h1 class="page-title">Schede di Allenamento</h1>
 
@@ -49,8 +49,7 @@
             </div>
         </div>
 
-        <!-- 2. Schede Admin (Visible to everyone) -->
-        <!-- Only show title if user is logged in, to separate from personal. If visitor, main header is enough? Maybe "Piani Consigliati" is good always. -->
+        <!-- 2. Schede Admin (Visibili a tutti) -->
         <h2 class="section-title">Piani Consigliati</h2>
 
         <div th:if="${schedeAdmin == null || schedeAdmin.isEmpty()}" class="empty-message">

@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <!-- Barra superiore (stile login) -->
+    <!-- Top Bar -->
     <div class="profile-topbar">
         <div class="profile-logo">
             <a th:href="@{/}">
@@ -19,7 +19,7 @@
     </div>
 
     <div class="profile-container">
-        <!-- Dati Utente Card -->
+        <!-- Dati Utente -->
         <div class="profile-card user-info-card">
             <div class="card-header">
                 <h1>Il Mio Profilo</h1>
@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <!-- Le Mie Schede Card -->
+        <!-- Le Mie Schede -->
         <div class="profile-card schede-card">
             <div class="card-header">
                 <h2>Le Mie Schede <span class="count-badge" th:text="${schedeCreate.size()}">0</span></h2>

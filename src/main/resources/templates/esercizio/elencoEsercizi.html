@@ -23,12 +23,12 @@
             </form>
         </div>
 
-        <!-- Admin Controls -->
+        <!-- Controlli Admin -->
         <div sec:authorize="hasAuthority('ADMIN')" class="admin-controls">
             <a th:href="@{/formEsercizio}" class="btn-add">+ Nuovo Esercizio</a>
         </div>
 
-        <!-- Esercizi List Loop -->
+        <!-- Elenco Esercizi -->
         <div th:if="${esercizi==null || esercizi.isEmpty()}" class="empty-list">
             <p>Nessun esercizio trovato.</p>
         </div>
@@ -48,7 +48,7 @@
                     </div>
                 </a>
 
-                <!-- Admin Actions -->
+                <!-- Azioni Admin -->
                 <div sec:authorize="hasAuthority('ADMIN')" class="card-actions">
                     <a th:href="@{'/esercizio/delete/' + ${esercizio.id}}" class="btn-delete"
                         onclick="return confirm('Sei sicuro di voler eliminare questo esercizio?');">Elimina</a>
