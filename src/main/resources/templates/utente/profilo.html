@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <title>PianoFitness - Profilo</title>
+    <link rel="stylesheet" th:href="@{/css/profilo.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Barra superiore (stile login) -->
+    <div class="profile-topbar">
+        <div class="profile-logo">
+            <a th:href="@{/}">
+                <img th:src="@{/images/Logo.png}" alt="PianoFitness Logo">
+            </a>
+        </div>
+        <a th:href="@{/}" class="btn-home">TORNA ALLA HOME</a>
+    </div>
+
+    <div class="profile-container">
+        <!-- Dati Utente Card -->
+        <div class="profile-card user-info-card">
+            <div class="card-header">
+                <h1>Il Mio Profilo</h1>
+                <p class="profile-subtitle">Gestisci i tuoi dati e le tue attività</p>
+            </div>
+
+            <div class="user-details">
+                <div class="detail-row">
+                    <span class="detail-label">Nome</span>
+                    <span class="detail-value" th:text="${utente.nome}">Nome</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Cognome</span>
+                    <span class="detail-value" th:text="${utente.cognome}">Cognome</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Data di Nascita</span>
+                    <span class="detail-value" th:text="${utente.dataNascita}">01/01/2000</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email</span>
+                    <span class="detail-value"
+                        th:text="${utente.credentials != null} ? ${utente.credentials.email} : 'N/A'">email@example.com</span>
+                </div>
+            </div>
+
+            <!-- Pulsanti Modifica -->
+            <div class="action-buttons">
+                <a th:href="@{/utente/edit/{id}(id=${utente.id})}" class="btn-primary">
+                    Modifica Dati Personali
+                </a>
+                <a th:href="@{/profilo/credentials}" class="btn-secondary">
+                    Modifica Credenziali
+                </a>
+            </div>
+        </div>
+
+        <!-- Le Mie Schede Card -->
+        <div class="profile-card schede-card">
+            <div class="card-header">
+                <h2>Le Mie Schede <span class="count-badge" th:text="${schedeCreate.size()}">0</span></h2>
+                <p class="profile-subtitle">I piani di allenamento che hai creato</p>
+            </div>
+
+            <div th:if="${!schedeCreate.isEmpty()}">
+                <ul class="schede-list">
+                    <li th:each="scheda : ${schedeCreate}" class="scheda-item">
+                        <a th:href="@{'/scheda/' + ${scheda.id}}" class="scheda-link">
+                            <span class="scheda-title" th:text="${scheda.titolo}">Titolo Scheda</span>
+                            <span class="scheda-meta" th:text="'Difficoltà: ' + ${scheda.difficolta}">Difficoltà:
+                                Media</span>
+                        </a>
+                        <div class="scheda-actions">
+                            <a th:href="@{'/schede/delete/' + ${scheda.id}}" class="btn-delete-icon"
+                                title="Elimina Scheda"
+                                onclick="return confirm('Sei sicuro di voler eliminare questa scheda?');">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div th:if="${schedeCreate.isEmpty()}" class="empty-schede">
+                Non hai ancora creato nessuna scheda di allenamento.
+            </div>
+        </div>
+
+
+
+</body>
+
+</html>

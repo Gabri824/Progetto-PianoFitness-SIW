@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>PianoFitness - Modifica Profilo</title>
+    <link rel="stylesheet" th:href="@{/css/profilo.css}">
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="profile-topbar">
+        <div class="profile-logo">
+            <a th:href="@{/}">
+                <img th:src="@{/images/Logo.png}" alt="PianoFitness Logo">
+            </a>
+        </div>
+        <a th:href="@{|/utente/${utente.id}|}" class="btn-home">TORNA AL PROFILO</a>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="card-header">
+                <h1>Modifica Dati Personali</h1>
+                <p class="profile-subtitle">Aggiorna le tue informazioni</p>
+            </div>
+
+            <form th:action="@{|/utente/edit/${utente.id}|}" method="post" th:object="${utente}">
+
+                <div class="detail-row" style="display: block; border-bottom: none; padding-bottom: 0;">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" th:field="*{nome}" required>
+                    </div>
+                </div>
+
+                <div class="detail-row" style="display: block; border-bottom: none; padding-bottom: 0;">
+                    <div class="form-group">
+                        <label for="cognome">Cognome</label>
+                        <input type="text" id="cognome" th:field="*{cognome}" required>
+                    </div>
+                </div>
+
+                <div class="detail-row" style="display: block; border-bottom: none; padding-bottom: 0;">
+                    <div class="form-group">
+                        <label for="dataNascita">Data di Nascita</label>
+                        <input type="date" id="dataNascita" th:field="*{dataNascita}" required>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button type="submit" class="btn-primary"
+                        style="border: none; cursor: pointer; font-size: 1rem;">Salva Modifiche</button>
+                    <a th:href="@{|/utente/${utente.id}|}" class="btn-secondary">Annulla</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

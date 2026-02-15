@@ -1,0 +1,338 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Oswald:wght@200..700&display=swap');
+
+:root {
+    --primary-navy: #0F2A50;
+    --accent-green: #2eaf45;
+    --text-white: #ffffff;
+    --bg-light: #f8f9fa;
+    --text-dark: #333333;
+    --border-color: #ddd;
+}
+
+body {
+    margin: 0;
+    font-family: 'Jost', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--primary-navy);
+}
+
+/* --- Container --- */
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* --- Detail Header --- */
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--accent-green);
+    padding-bottom: 20px;
+}
+
+.detail-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3rem;
+    color: var(--primary-navy);
+    margin: 0;
+    text-transform: uppercase;
+}
+
+/* --- Detail Content --- */
+.detail-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    padding: 40px;
+}
+
+.detail-info {
+    margin-bottom: 30px;
+}
+
+.info-item {
+    margin-bottom: 20px;
+}
+
+.info-label {
+    font-family: 'Oswald', sans-serif;
+    color: var(--accent-green);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.section-heading {
+    font-family: 'Oswald', sans-serif;
+    color: var(--primary-navy);
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--accent-green);
+    padding-bottom: 10px;
+    margin-top: 40px;
+}
+
+.info-value {
+    font-size: 1.5rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.description-text {
+    white-space: pre-line;
+}
+
+/* --- Scheda Content (Righe) --- */
+.scheda-content {
+    margin-top: 40px;
+}
+
+.day-section {
+    margin-bottom: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fafafa;
+}
+
+.day-title {
+    font-family: 'Oswald', sans-serif;
+    color: var(--primary-navy);
+    font-size: 1.9rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.exercise-list {
+    list-style: none;
+    padding: 0;
+}
+
+.exercise-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.exercise-item:last-child {
+    border-bottom: none;
+}
+
+.exercise-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.exercise-name {
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: var(--primary-navy);
+    margin-bottom: 4px;
+}
+
+.exercise-details {
+    color: #555;
+    font-size: 1.3rem;
+}
+
+.exercise-notes {
+    font-size: 0.85rem;
+    color: #777;
+    font-style: italic;
+    margin-top: 2px;
+}
+
+/* --- Add Riga Form --- */
+.add-riga-container {
+    background-color: #e8f5e9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border: 1px solid #c8e6c9;
+}
+
+.add-riga-container h3 {
+    font-family: 'Oswald', sans-serif;
+    color: var(--primary-navy);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 100px;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Jost', sans-serif;
+}
+
+.btn-add {
+    background-color: var(--accent-green);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    height: 40px;
+    /* Match input height roughly */
+    transition: background-color 0.3s;
+}
+
+.btn-add:hover {
+    background-color: #269139;
+}
+
+/* --- Actions --- */
+.scheda-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 15px;
+}
+
+.btn-action {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+}
+
+.btn-edit {
+    background-color: var(--primary-navy);
+    color: var(--text-white);
+}
+
+.btn-edit:hover {
+    background-color: #1a4b8c;
+    transform: translateY(-2px);
+}
+
+.btn-delete {
+    background-color: transparent;
+    color: #d63031;
+    border-color: #d63031;
+}
+
+.btn-delete:hover {
+    background-color: #d63031;
+    color: var(--text-white);
+}
+
+.btn-icon-delete {
+    color: #d63031;
+    font-size: 1.1rem;
+    padding: 8px;
+    transition: color 0.3s;
+}
+
+.btn-icon-delete:hover {
+    color: #b71c1c;
+}
+
+/* --- Scroll to Top --- */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--primary-navy);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+    z-index: 999;
+
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(100px);
+
+    animation: fadeUpReveal linear forwards;
+    animation-timeline: scroll();
+    animation-range: 0 300px;
+}
+
+@keyframes fadeUpReveal {
+    to {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+}
+
+.scroll-to-top:hover {
+    background-color: var(--accent-green);
+}
+
+.empty-message {
+    font-style: italic;
+    color: #888;
+    margin-top: 20px;
+}
+
+/* Navigation Back Button Style */
+.btn-nav-back {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary-navy);
+    /* Default Blue */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-nav-back:hover {
+    background-color: var(--accent-green);
+    /* Hover Green */
+    transform: translateY(-2px);
+    color: white;
+    /* Ensure text remains white */
+}

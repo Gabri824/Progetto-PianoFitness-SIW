@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title th:text="'PianoFitness - ' + ${esercizio.nome}">PianoFitness - Dettaglio Esercizio</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/dettaglioEsercizio.css}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div id="top" th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="detail-header">
+            <h1 class="detail-title" th:text="${esercizio.nome}">Nome Esercizio</h1>
+
+            <!-- Back Button Logic -->
+            <a th:if="${provenienza == 'scheda' && schedaId != null}" th:href="@{'/scheda/' + ${schedaId}}"
+                class="btn-nav-back">
+                Torna alla Scheda
+            </a>
+
+            <a th:unless="${provenienza == 'scheda'}" th:href="@{/esercizi}" class="btn-nav-back">
+                Torna agli Esercizi
+            </a>
+        </div>
+
+        <!-- Detail Card -->
+        <div class="detail-card">
+
+            <div class="detail-info">
+                <div class="info-item">
+                    <span class="info-label">Categoria</span>
+                    <span class="info-value" th:text="${esercizio.categoria}">Cardio</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Muscolo Target</span>
+                    <span class="info-value" th:text="${esercizio.muscoloTarget}">Gambe</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Descrizione</span>
+                    <p class="description-text info-value" th:text="${esercizio.descrizione}">
+                        Descrizione dettagliata dell'esercizio...
+                    </p>
+                </div>
+
+                <!-- Admin Action Buttons -->
+                <div sec:authorize="hasAuthority('ADMIN')" class="admin-actions">
+                    <a th:href="@{'/esercizio/edit/' + ${esercizio.id}}" class="btn-action btn-edit">Modifica</a>
+                    <a th:href="@{'/esercizio/delete/' + ${esercizio.id}}" class="btn-action btn-delete"
+                        onclick="return confirm('Sei sicuro di voler eliminare questo esercizio?');">Cancella</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <a href="#top" class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+</body>
+
+</html>

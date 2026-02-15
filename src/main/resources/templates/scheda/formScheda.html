@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>PianoFitness - Nuova Scheda</title>
+    <link rel="stylesheet" th:href="@{/css/formScheda.css}">
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="form-topbar">
+        <div class="form-logo">
+            <a th:href="@{/}">
+                <img th:src="@{/images/Logo.png}" alt="PianoFitness Logo">
+            </a>
+        </div>
+        <!-- Link back to the schede list -->
+        <a th:href="@{/schede}" class="btn-back">TORNA INDIETRO</a>
+    </div>
+
+    <div class="form-container">
+        <div class="form-card">
+            <h1>Nuova Scheda</h1>
+            <p class="form-subtitle">Crea il tuo piano di allenamento personalizzato</p>
+
+            <div th:if="${messaggioErrore}" class="alert alert-error">
+                <span th:text="${messaggioErrore}"></span>
+            </div>
+
+            <form th:action="@{/schede/formScheda}" method="post" th:object="${scheda}">
+
+                <div class="form-group">
+                    <label for="titolo">Titolo Scheda</label>
+                    <input type="text" id="titolo" th:field="*{titolo}" placeholder="Es. Allenamento Forza 3 Giorni"
+                        required>
+                    <div th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}" class="alert alert-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="difficolta">Difficoltà</label>
+                    <select id="difficolta" th:field="*{difficolta}" required>
+                        <option value="" disabled selected>Seleziona la difficoltà</option>
+                        <option value="Principiante">Principiante</option>
+                        <option value="Intermedio">Intermedio</option>
+                        <option value="Avanzato">Avanzato</option>
+                        <option value="Elite">Elite</option>
+                    </select>
+                    <div th:if="${#fields.hasErrors('difficolta')}" th:errors="*{difficolta}" class="alert alert-error">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descrizione">Descrizione</label>
+                    <textarea id="descrizione" th:field="*{descrizione}"
+                        placeholder="Descrivi l'obiettivo e la struttura della scheda..." required></textarea>
+                    <div th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"
+                        class="alert alert-error"></div>
+                </div>
+
+                <button type="submit" class="btn-submit">Crea Scheda</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

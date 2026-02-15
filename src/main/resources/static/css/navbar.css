@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+/* Navbar Styles */
+:root {
+    /* PianoFitness Logo Palette */
+    /* --navbar-bg: #FFFFFF; /* White Background */
+    /* --navbar-text: #0b1f3a; /* Dark Navy Blue (FITNESS / Dumbbell) */
+    /* --navbar-accent: #37af4b; /* Vibrant Green (PIANO) */
+
+    /* Let's refine for a cohesive look based on the LOGO */
+    --navbar-bg: #0F2A50;
+    --navbar-text: #ffffff;
+    /* Deep Navy */
+    --navbar-accent: #2eaf45;
+    /* Brand Green */
+    --navbar-hover: #2eaf45;
+    /* Light Green Tint */
+
+    /* Button Colors */
+    --btn-login-text: #2eaf45;
+    --btn-login-border: #2eaf45;
+
+    --btn-register-bg: #2eaf45;
+    --btn-register-text: #ffffff;
+
+    --btn-logout-text: #d63031;
+    /* Red for danger/exit action is standard UX, but let's stick to brand if needed. Let's use Red for Logout as it's standard. */
+    --btn-logout-border: #d63031;
+}
+
+body {
+    margin: 0;
+    font-family: 'Oswald', 'Segoe UI', sans-serif;
+    /* Modern, clean font used in fitness branding */
+}
+
+/* Main Container (nav tag) */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--navbar-bg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    /* Softer shadow for white bg */
+    padding: 10px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 3px solid var(--navbar-accent);
+    /* Green accent line at bottom */
+}
+
+/* 1. Logo Section */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 90px;
+    width: auto;
+    border-radius: 15px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.logo img:hover {
+    transform: scale(1.08);
+}
+
+/* 2. Central Navigation Links */
+.navbar-nav {
+    display: flex;
+    gap: 35px;
+    align-items: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--navbar-text);
+    font-weight: 700;
+    font-size: 1.35rem;
+    padding: 8px 0;
+    position: relative;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* Underline Animation */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--navbar-accent);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.nav-link:hover {
+    color: var(--navbar-accent);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* 3. Right Side: Auth Buttons */
+.nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Base Button Style */
+.btn {
+    padding: 10px 24px;
+    border-radius: 6px;
+    /* Slightly rounded */
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Login Button (Outline Style) */
+/* Login Button (Filled Style - Matches Register) */
+.btn-login {
+    background-color: var(--btn-register-bg);
+    color: var(--btn-register-text);
+    border: 2px solid var(--btn-register-bg);
+}
+
+.btn-login:hover {
+    background-color: #269139;
+    border-color: #269139;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(46, 175, 69, 0.4);
+}
+
+/* Register Button (Filled Style) */
+.btn-register {
+    background-color: var(--btn-register-bg);
+    color: var(--btn-register-text);
+    border: 2px solid var(--btn-register-bg);
+}
+
+.btn-register:hover {
+    background-color: #269139;
+    /* Slightly Darker Green */
+    border-color: #269139;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(46, 175, 69, 0.4);
+}
+
+/* Logout Button (Danger/Action) */
+/* Logout Button (Matches Login/Register Style) */
+.btn-logout {
+    background-color: var(--btn-register-bg);
+    color: var(--btn-register-text);
+    border: 2px solid var(--btn-register-bg);
+    padding: 10px 24px;
+    /* Match standard btn padding */
+}
+
+.btn-logout:hover {
+    background-color: #269139;
+    /* Slightly Darker Green */
+    border-color: #269139;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(46, 175, 69, 0.4);
+    color: white;
+}

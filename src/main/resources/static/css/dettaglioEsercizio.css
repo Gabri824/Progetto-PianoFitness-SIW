@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Oswald:wght@200..700&display=swap');
+
+:root {
+    --primary-navy: #0F2A50;
+    --accent-green: #2eaf45;
+    --text-white: #ffffff;
+    --bg-light: #f8f9fa;
+    --text-dark: #333333;
+    --border-color: #ddd;
+}
+
+body {
+    margin: 0;
+    font-family: 'Jost', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--primary-navy);
+}
+
+/* --- Container --- */
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* --- Detail Header --- */
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--accent-green);
+    padding-bottom: 20px;
+}
+
+.detail-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3rem;
+    color: var(--primary-navy);
+    margin: 0;
+    text-transform: uppercase;
+}
+
+/* --- Detail Content --- */
+.detail-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    /* Removed flex layout since image is gone */
+}
+
+.detail-info {
+    padding: 40px;
+}
+
+.info-item {
+    margin-bottom: 20px;
+}
+
+.info-label {
+    font-family: 'Oswald', sans-serif;
+    color: var(--accent-green);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.info-value {
+    font-size: 1.5rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.description-text {
+    white-space: pre-line;
+}
+
+/* --- Admin Actions --- */
+.admin-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 15px;
+}
+
+.btn-action {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+}
+
+.btn-edit {
+    background-color: var(--primary-navy);
+    color: var(--text-white);
+}
+
+.btn-edit:hover {
+    background-color: #1a4b8c;
+    transform: translateY(-2px);
+}
+
+.btn-delete {
+    background-color: transparent;
+    color: #d63031;
+    border-color: #d63031;
+}
+
+.btn-delete:hover {
+    background-color: #d63031;
+    color: var(--text-white);
+}
+
+/* --- Scroll to Top --- */
+/* Implemented using pure CSS scroll-timeline */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--primary-navy);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+    z-index: 999;
+
+    /* Animation for reveal */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(100px);
+
+    animation: fadeUpReveal linear forwards;
+    animation-timeline: scroll();
+    animation-range: 0 300px;
+    /* Reveal after scrolling 300px */
+}
+
+@keyframes fadeUpReveal {
+    to {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+}
+
+.scroll-to-top:hover {
+    background-color: var(--accent-green);
+}
+
+/* Navigation Back Button Style */
+.btn-nav-back {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary-navy);
+    /* Default Blue */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-nav-back:hover {
+    background-color: var(--accent-green);
+    /* Hover Green */
+    transform: translateY(-2px);
+    color: white;
+    /* Ensure text remains white */
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>PianoFitness - Schede di Allenamento</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/schede.css}">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div id="top" th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container">
+        <!-- Header & Search -->
+        <div class="page-header">
+            <h1 class="page-title">Schede di Allenamento</h1>
+
+            <form th:action="@{/schede}" method="get" class="search-bar">
+                <input type="text" name="keyword" class="search-input" placeholder="Cerca scheda..."
+                    th:value="${keyword}">
+                <button type="submit" class="btn-search">Cerca</button>
+            </form>
+        </div>
+
+
+
+        <div th:if="${schedePersonali != null}">
+            <div class="section-header-flex">
+                <h2 class="section-title">I Tuoi Piani</h2>
+                <a sec:authorize="isAuthenticated()" th:href="@{/schede/formScheda}" class="btn-create">+ Nuova
+                    Scheda</a>
+            </div>
+
+            <div th:if="${schedePersonali.isEmpty()}" class="empty-message">
+                Non hai ancora creato nessuna scheda di allenamento.
+            </div>
+
+            <div class="schede-grid">
+                <div th:each="scheda : ${schedePersonali}" class="scheda-card" style="border-left-color: #2196f3;">
+                    <a th:href="@{'/scheda/' + ${scheda.id}}" class="card-link">
+                        <span class="access-badge badge-personal">Personale</span>
+                        <h3 class="card-title" th:text="${scheda.titolo}">Titolo Scheda</h3>
+                        <div class="card-meta">Difficoltà: <span th:text="${scheda.difficolta}">Media</span></div>
+                        <div class="card-meta">Data: <span th:text="${scheda.dataCreazione}">01/01/2026</span></div>
+                        <div class="card-desc" th:text="${scheda.descrizione}">Descrizione...</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Schede Admin (Visible to everyone) -->
+        <!-- Only show title if user is logged in, to separate from personal. If visitor, main header is enough? Maybe "Piani Consigliati" is good always. -->
+        <h2 class="section-title">Piani Consigliati</h2>
+
+        <div th:if="${schedeAdmin == null || schedeAdmin.isEmpty()}" class="empty-message">
+            Nessuna scheda consigliata trovata.
+        </div>
+
+        <div class="schede-grid">
+            <div th:each="scheda : ${schedeAdmin}" class="scheda-card">
+                <a th:href="@{'/scheda/' + ${scheda.id}}" class="card-link">
+                    <span class="access-badge badge-admin">Ufficiale</span>
+                    <h3 class="card-title" th:text="${scheda.titolo}">Titolo Scheda</h3>
+                    <div class="card-meta">Difficoltà: <span th:text="${scheda.difficolta}">Media</span></div>
+                    <div class="card-desc" th:text="${scheda.descrizione}">Descrizione...</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 3. TUTTE le schede (Admin Only) -->
+        <div sec:authorize="hasAuthority('ADMIN')">
+            <h2 class="section-title">Tutti i Piani </h2>
+
+            <div th:if="${allSchede == null || allSchede.isEmpty()}" class="empty-message">
+                Nessuna scheda presente nel sistema.
+            </div>
+
+            <div class="schede-grid">
+                <div th:each="scheda : ${allSchede}" class="scheda-card" style="border-left-color: #666;">
+                    <a th:href="@{'/scheda/' + ${scheda.id}}" class="card-link">
+                        <div class="card-meta">Autore: <span
+                                th:text="${scheda.autore.nome + ' ' + scheda.autore.cognome}">Utente</span></div>
+                        <h3 class="card-title" th:text="${scheda.titolo}">Titolo Scheda</h3>
+                        <div class="card-meta">Difficoltà: <span th:text="${scheda.difficolta}">Media</span></div>
+                        <div class="card-desc" th:text="${scheda.descrizione}">Descrizione...</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

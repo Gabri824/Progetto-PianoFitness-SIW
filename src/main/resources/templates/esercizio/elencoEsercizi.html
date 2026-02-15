@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>PianoFitness - Esercizi</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/esercizi.css}">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div id="top" th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container">
+        <!-- Header & Search -->
+        <div class="page-header">
+            <h1 class="page-title">I Nostri Esercizi</h1>
+
+            <form th:action="@{/esercizi}" method="get" class="search-bar">
+                <input type="text" name="keyword" class="search-input" placeholder="Cerca esercizio..."
+                    th:value="${keyword}">
+                <button type="submit" class="btn-search">Cerca</button>
+            </form>
+        </div>
+
+        <!-- Admin Controls -->
+        <div sec:authorize="hasAuthority('ADMIN')" class="admin-controls">
+            <a th:href="@{/formEsercizio}" class="btn-add">+ Nuovo Esercizio</a>
+        </div>
+
+        <!-- Esercizi List Loop -->
+        <div th:if="${esercizi==null || esercizi.isEmpty()}" class="empty-list">
+            <p>Nessun esercizio trovato.</p>
+        </div>
+
+        <div class="exercise-grid">
+            <div th:each="esercizio : ${esercizi}" class="exercise-card">
+                <!-- Link to Detail Page -->
+                <a th:href="@{'/esercizio/' + ${esercizio.id}}" class="card-link">
+                    <!-- Placeholder Image (Generate logic or static for now) -->
+
+
+                    <div class="card-content">
+                        <h2 class="card-title" th:text="${esercizio.nome}">Nome Esercizio</h2>
+                        <div class="card-meta">Categoria: <span th:text="${esercizio.categoria}">Cardio</span></div>
+                        <div class="card-meta">Muscolo: <span th:text="${esercizio.muscoloTarget}">Gambe</span></div>
+                        <div class="card-desc" th:text="${esercizio.descrizione}">Descrizione breve...</div>
+                    </div>
+                </a>
+
+                <!-- Admin Actions -->
+                <div sec:authorize="hasAuthority('ADMIN')" class="card-actions">
+                    <a th:href="@{'/esercizio/delete/' + ${esercizio.id}}" class="btn-delete"
+                        onclick="return confirm('Sei sicuro di voler eliminare questo esercizio?');">Elimina</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <a href="#top" class="scroll-to-top" title="Torna all'inizio">
+        ↑
+    </a>
+</body>
+
+</html>

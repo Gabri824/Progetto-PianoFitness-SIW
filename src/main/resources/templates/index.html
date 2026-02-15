@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>PianoFitness - Home</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+
+<body>
+
+
+    <div id="top" th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <section class="hero">
+        <div class="content-text">
+            <h1>Benvenuto in PianoFitness</h1>
+            <p>La tua piattaforma definitiva per raggiungere i tuoi obiettivi di fitness. Allenati con metodo, traccia i
+                tuoi progressi e scopri un nuovo modo di vivere la palestra.</p>
+            <div sec:authorize="isAnonymous()">
+                <a th:href="@{/register}" class="cta-button">INIZIA ORA</a>
+            </div>
+        </div>
+        <div class="content-image">
+            <img th:src="@{/images/palestra.jpg}" alt="Palestra">
+        </div>
+    </section>
+
+    <section class="esercizi">
+        <div class="content-image">
+            <img th:src="@{/images/listaEsercizi.png}" alt="Lista Esercizi">
+        </div>
+        <div class="content-text">
+            <h2>Esplora gli Esercizi</h2>
+            <p>Consulta la nostra vasta libreria di esercizi. Trova ispirazione per i tuoi allenamenti, impara la
+                tecnica corretta e scopri nuove sfide per ogni gruppo muscolare.</p>
+            <a th:href="@{/esercizi}" class="cta-button">VAI AGLI ESERCIZI</a>
+        </div>
+    </section>
+
+    <section class="schede">
+        <div class="content-text">
+            <h2>Le Tue Schede</h2>
+            <p>Crea le tue schede personalizzate o prova quelle create dai nostri istruttori esperti. Organizza la tua
+                settimana di allenamento e monitora i tuoi risultati.</p>
+            <a th:href="@{/schede}" class="cta-button">VAI ALLE SCHEDE</a>
+        </div>
+        <div class="content-image">
+            <img th:src="@{/images/Scheda Allenamento.png}" alt="Scheda Allenamento">
+        </div>
+    </section>
+
+    <a href="#top" class="scroll-to-top" title="Torna all'inizio">
+        ↑
+    </a>
+
+</body>

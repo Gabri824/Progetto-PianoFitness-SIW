@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>PianoFitness - Gestione Utenti</title>
+    <link rel="stylesheet" th:href="@{/css/utenti.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="dashboard-topbar">
+        <div class="dashboard-logo">
+            <a th:href="@{/admin/dashboard}">
+                <img th:src="@{/images/Logo.png}" alt="PianoFitness Logo">
+            </a>
+        </div>
+        <a th:href="@{/admin/dashboard}" class="btn-home">TORNA ALLA DASHBOARD</a>
+    </div>
+
+    <div class="dashboard-container">
+
+        <div class="section-header">
+            <h1>Gestione Utenti</h1>
+            <p class="section-subtitle">Visualizza e gestisci tutti gli utenti del sistema</p>
+        </div>
+
+        <div th:if="${messaggioSuccesso}" class="alert alert-success"
+            style="padding: 15px; background: #d4edda; color: #155724; border-radius: 5px; margin-bottom: 20px;">
+            <span th:text="${messaggioSuccesso}"></span>
+        </div>
+
+        <div class="table-container">
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Cognome</th>
+                        <th>Email</th>
+                        <th>Ruolo</th>
+                        <th>Stato</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="utente : ${utenti}">
+                        <td th:text="${utente.nome}">Nome</td>
+                        <td th:text="${utente.cognome}">Cognome</td>
+                        <td th:text="${utente.credentials.email}">Email</td>
+                        <td>
+                            <span th:if="${utente.credentials.role == 'ADMIN'}"
+                                class="role-badge role-admin">ADMIN</span>
+                            <span th:if="${utente.credentials.role == 'DEFAULT'}"
+                                class="role-badge role-user">USER</span>
+                        </td>
+                        <td>
+                            <span th:if="${utente.banned}" class="status-banned">BANNATO</span>
+                            <span th:if="${!utente.banned}">Attivo</span>
+                        </td>
+                        <td class="table-actions">
+                            <!-- Ban/Unban -->
+                            <form th:if="${!utente.banned}" th:action="@{'/admin/ban/' + ${utente.id}}" method="post">
+                                <button type="submit" class="btn-sm btn-danger"
+                                    onclick="return confirm('Sei sicuro di voler bannare questo utente?');">
+                                    <i class="fas fa-ban"></i> Ban
+                                </button>
+                            </form>
+                            <form th:if="${utente.banned}" th:action="@{'/admin/unban/' + ${utente.id}}" method="post">
+                                <button type="submit" class="btn-sm btn-info">
+                                    <i class="fas fa-check"></i> Unban
+                                </button>
+                            </form>
+
+                            <!-- Role Change -->
+                            <form th:if="${utente.credentials.role == 'DEFAULT'}"
+                                th:action="@{'/admin/changeAdminRole/' + ${utente.id}}" method="post">
+                                <button type="submit" class="btn-sm btn-warning"
+                                    onclick="return confirm('Promuovere a Admin?');">
+                                    <i class="fas fa-user-shield"></i> Make Admin
+                                </button>
+                            </form>
+                            <form th:if="${utente.credentials.role == 'ADMIN'}"
+                                th:action="@{'/admin/changeUserRole/' + ${utente.id}}" method="post">
+                                <button type="submit" class="btn-sm btn-warning"
+                                    onclick="return confirm('Rimuovere privilegi Admin?');">
+                                    <i class="fas fa-user"></i> Revoke Admin
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

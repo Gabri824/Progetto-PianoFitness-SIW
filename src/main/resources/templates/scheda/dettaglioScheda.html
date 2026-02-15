@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title th:text="'PianoFitness - ' + ${scheda.titolo}">PianoFitness - Dettaglio Scheda</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/dettaglioScheda.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div id="top" th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="detail-header">
+            <h1 class="detail-title" th:text="${scheda.titolo}">Titolo Scheda</h1>
+            <!-- Back Button linked to list -->
+            <!-- Back Button linked to list -->
+            <a th:href="@{/schede}" class="btn-nav-back">Torna all'Elenco</a>
+        </div>
+
+        <!-- Detail Card -->
+        <div class="detail-card">
+
+            <div class="detail-info">
+                <div class="info-item">
+                    <span class="info-label">Autore</span>
+                    <span class="info-value" th:text="${scheda.autore.nome + ' ' + scheda.autore.cognome}">Nome
+                        Autore</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Difficoltà</span>
+                    <span class="info-value" th:text="${scheda.difficolta}">Media</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Descrizione</span>
+                    <p class="description-text info-value" th:text="${scheda.descrizione}">
+                        Descrizione dettagliata del piano di allenamento...
+                    </p>
+                </div>
+
+                <!-- Admin/Owner Action Buttons -->
+                <div th:if="${canEdit}" class="scheda-actions">
+                    <a th:href="@{'/schede/edit/' + ${scheda.id}}" class="btn-action btn-edit">Modifica Scheda</a>
+                    <a th:href="@{'/schede/delete/' + ${scheda.id}}" class="btn-action btn-delete"
+                        onclick="return confirm('Sei sicuro di voler eliminare questa scheda?');">Elimina Scheda</a>
+                </div>
+            </div>
+
+            <!-- Content of the Scheda (Exercises grouped by Day) -->
+            <div class="scheda-content">
+                <h2 class="section-heading">Programma di Allenamento</h2>
+
+                <!-- Form Aggiunta Riga (Solo se canEdit) -->
+                <div th:if="${canEdit}" class="add-riga-container">
+                    <h3>Aggiungi Esercizio</h3>
+                    <form th:action="@{'/scheda/' + ${scheda.id} + '/addRiga'}" method="post" th:object="${nuovaRiga}"
+                        class="form-inline">
+                        <div class="form-group">
+                            <label>Giorno</label>
+                            <input type="text" th:field="*{giorno}" placeholder="Es. Lunedì" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Esercizio</label>
+                            <select th:field="*{esercizio}" required>
+                                <option value="" disabled selected>Seleziona Esercizio</option>
+                                <option th:each="es : ${listaEsercizi}" th:value="${es.id}" th:text="${es.nome}">
+                                    Esercizio</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Serie</label>
+                            <input type="number" th:field="*{serie}" placeholder="3" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Ripetizioni</label>
+                            <input type="number" th:field="*{ripetizioni}" placeholder="10" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Recupero (s)</label>
+                            <input type="number" th:field="*{tempoRiposoSecondi}" placeholder="60" min="0" required>
+                        </div>
+                        <div class="form-group" style="flex-grow: 2;">
+                            <label>Note</label>
+                            <input type="text" th:field="*{note}" placeholder="Note opzionali">
+                        </div>
+                        <button type="submit" class="btn-add">Aggiungi</button>
+                    </form>
+                </div>
+
+                <div th:if="${schedaDivisa != null && !schedaDivisa.isEmpty()}">
+                    <div th:each="entry : ${schedaDivisa}" class="day-section">
+                        <h3 class="day-title" th:text="${entry.key}">Giorno X</h3>
+                        <ul class="exercise-list">
+                            <li th:each="riga : ${entry.value}" class="exercise-item">
+                                <div class="exercise-info">
+                                    <span class="exercise-name">
+                                        <a th:href="@{'/esercizio/' + ${riga.esercizio.id} + '?provenienza=scheda&schedaId=' + ${scheda.id}}"
+                                            th:text="${riga.esercizio.nome}"
+                                            style="text-decoration: none; color: inherit;">Nome Esercizio</a>
+                                    </span>
+                                    <span class="exercise-details"
+                                        th:text="${riga.serie} + 'x' + ${riga.ripetizioni} + ' - Rec: ' + ${riga.tempoRiposoSecondi} + 's'">
+                                        3x10 - Rec: 60s
+                                    </span>
+                                    <div class="exercise-notes" th:if="${riga.note != null && !riga.note.isEmpty()}"
+                                        th:text="${riga.note}">Note...</div>
+                                </div>
+
+                                <div class="exercise-actions" th:if="${canEdit}">
+                                    <a th:href="@{'/riga/edit/' + ${riga.id}}" class="btn-icon-edit"
+                                        title="Modifica esercizio"
+                                        style="color: var(--primary-navy); margin-right: 10px; text-decoration: none;">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a th:href="@{'/scheda/' + ${scheda.id} + '/deleteRiga/' + ${riga.id}}"
+                                        class="btn-icon-delete" title="Rimuovi esercizio"
+                                        onclick="return confirm('Rimuovere questo esercizio dalla scheda?');">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div th:if="${schedaDivisa == null || schedaDivisa.isEmpty()}" class="empty-message">
+                    Nessun esercizio inserito in questa scheda.
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Recensioni Section (Instructor/Admin) -->
+        <div class="detail-card" style="margin-top: 30px;">
+            <div class="detail-header"
+                style="border-bottom: 2px solid var(--accent-green); padding-bottom: 15px; margin-bottom: 20px;">
+                <h2 style="margin: 0; font-family: 'Oswald', sans-serif; color: var(--primary-navy);">Recensioni
+                    Istruttori</h2>
+                <a th:if="${isAdmin}" th:href="@{'/scheda/' + ${scheda.id} + '/formRecensione'}"
+                    class="btn-action btn-edit" style="font-size: 0.9rem;">
+                    <i class="fas fa-plus"></i> Scrivi Recensione
+                </a>
+            </div>
+
+            <div th:if="${recensioni == null || recensioni.isEmpty()}" class="empty-message">
+                Nessuna recensione presente per questa scheda.
+            </div>
+
+            <div th:if="${recensioni != null && !recensioni.isEmpty()}" class="reviews-list">
+                <div th:each="recensione : ${recensioni}" class="review-item"
+                    style="border-bottom: 1px solid #eee; padding: 15px 0;">
+                    <div class="review-header"
+                        style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <div>
+                            <span class="review-author"
+                                th:text="${recensione.autore.nome + ' ' + recensione.autore.cognome}"
+                                style="font-weight: bold; color: var(--primary-navy);">Autore</span>
+                            <span class="review-date"
+                                th:text="${#temporals.format(recensione.dataCreazione, 'dd/MM/yyyy')}"
+                                style="color: #666; font-size: 0.85rem; margin-left: 10px;">Data</span>
+                        </div>
+                        <div class="review-rating" style="color: #f1c40f;">
+                            <i th:each="i : ${#numbers.sequence(1, recensione.valutazione)}" class="fas fa-star"></i>
+                            <i th:each="i : ${#numbers.sequence(recensione.valutazione + 1, 5)}" class="far fa-star"
+                                th:if="${recensione.valutazione < 5}"></i>
+                        </div>
+                    </div>
+
+                    <p class="review-text" th:text="${recensione.testo}"
+                        style="margin: 0; color: #333; line-height: 1.5;">Testo della recensione...</p>
+
+                    <div th:if="${isAdmin}" class="review-actions" style="margin-top: 10px; display: flex; gap: 10px;">
+                        <a th:href="@{'/scheda/' + ${scheda.id} + '/recensione/edit/' + ${recensione.id}}"
+                            class="btn-sm btn-info" style="text-decoration: none;">
+                            <i class="fas fa-edit"></i> Modifica
+                        </a>
+                        <a th:href="@{'/scheda/' + ${scheda.id} + '/recensione/delete/' + ${recensione.id}}"
+                            class="btn-sm btn-danger"
+                            onclick="return confirm('Sei sicuro di voler eliminare questa recensione?');"
+                            style="text-decoration: none;">
+                            <i class="fas fa-trash"></i> Elimina
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <a href="#top" class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+</body>
+
+</html>

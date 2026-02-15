@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>PianoFitness - Modifica Esercizio Scheda</title>
+    <link rel="stylesheet" th:href="@{/css/formScheda.css}">
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="form-topbar">
+        <div class="form-logo">
+            <a th:href="@{/}">
+                <img th:src="@{/images/Logo.png}" alt="PianoFitness Logo">
+            </a>
+        </div>
+        <!-- Link back to the specific scheda detail -->
+        <a th:href="@{|/scheda/${rigaScheda.scheda.id}|}" class="btn-back">TORNA INDIETRO</a>
+    </div>
+
+    <div class="form-container">
+        <div class="form-card">
+            <h1>Modifica Esercizio</h1>
+            <p class="form-subtitle" th:text="'Scheda: ' + ${rigaScheda.scheda.titolo}">Dettagli Scheda</p>
+
+            <div th:if="${messaggioErrore}" class="alert alert-error">
+                <span th:text="${messaggioErrore}"></span>
+            </div>
+
+            <form th:action="@{|/riga/edit/${rigaScheda.id}|}" method="post" th:object="${rigaScheda}">
+
+                <div class="form-group">
+                    <label for="giorno">Giorno</label>
+                    <input type="text" id="giorno" th:field="*{giorno}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="esercizio">Esercizio</label>
+                    <select id="esercizio" th:field="*{esercizio}" required>
+                        <option value="" disabled>Seleziona Esercizio</option>
+                        <option th:each="es : ${listaEsercizi}" th:value="${es.id}" th:text="${es.nome}">Esercizio
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="serie">Serie</label>
+                    <input type="number" id="serie" th:field="*{serie}" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ripetizioni">Ripetizioni</label>
+                    <input type="number" id="ripetizioni" th:field="*{ripetizioni}" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tempoRiposoSecondi">Recupero (secondi)</label>
+                    <input type="number" id="tempoRiposoSecondi" th:field="*{tempoRiposoSecondi}" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="note">Note</label>
+                    <textarea id="note" th:field="*{note}" placeholder="Note opzionali..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Salva Modifiche</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

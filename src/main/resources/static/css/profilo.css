@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Oswald:wght@200..700&display=swap');
+
+:root {
+    --primary-navy: #0F2A50;
+    --accent-green: #2eaf45;
+    --text-white: #ffffff;
+    --bg-light: #f8f9fa;
+    --text-dark: #333333;
+    --border-color: #ddd;
+}
+
+body {
+    margin: 0;
+    font-family: 'Jost', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--primary-navy);
+}
+
+/* --- Profile Top Bar (Same as Auth) --- */
+.profile-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: var(--primary-navy);
+    color: var(--text-white);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid var(--accent-green);
+}
+
+.profile-logo a {
+    display: flex;
+    align-items: center;
+}
+
+.profile-logo img {
+    height: 80px;
+    width: auto;
+    border-radius: 12px;
+}
+
+.btn-home {
+    text-decoration: none;
+    color: var(--text-white);
+    background-color: var(--accent-green);
+    border: 2px solid var(--accent-green);
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+}
+
+.btn-home:hover {
+    background-color: #269139;
+    border-color: #269139;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(46, 175, 69, 0.4);
+}
+
+/* --- Container --- */
+.profile-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* --- Cards Shared Styles --- */
+.profile-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+}
+
+.card-header h1,
+.card-header h2 {
+    font-family: 'Oswald', sans-serif;
+    color: var(--primary-navy);
+    margin-top: 0;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.card-header h2 {
+    font-size: 1.5rem;
+}
+
+.profile-subtitle {
+    color: #666;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+/* --- User Info Styles --- */
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: #666;
+    font-size: 1.1rem;
+    /* Increased size */
+}
+
+.detail-value {
+    font-weight: 500;
+    color: var(--primary-navy);
+    font-size: 1.1rem;
+    /* Increased size */
+}
+
+.action-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn-primary,
+.btn-secondary {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 1rem;
+    /* Increased from 0.9rem */
+    transition: all 0.3s;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+/* Modifica Dati Personali: Blu -> Verde */
+.btn-primary {
+    background-color: var(--primary-navy);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-green);
+    transform: translateY(-2px);
+}
+
+/* Modifica Credenziali: Verde -> Blu */
+.btn-secondary {
+    background-color: var(--accent-green);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-navy);
+    transform: translateY(-2px);
+}
+
+/* --- Schede Section Styles --- */
+.schede-stats {
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.count-badge {
+    background-color: var(--accent-green);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    margin-left: 5px;
+}
+
+.schede-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.scheda-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: all 0.2s;
+    background-color: #fff;
+}
+
+.scheda-item:hover {
+    border-color: var(--accent-green);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.scheda-link {
+    text-decoration: none;
+    color: inherit;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.scheda-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    color: var(--primary-navy);
+    margin-bottom: 4px;
+}
+
+.scheda-meta {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.scheda-actions {
+    margin-left: 20px;
+}
+
+.btn-delete-icon {
+    color: #d63031;
+    font-size: 1.1rem;
+    padding: 8px;
+    transition: color 0.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-delete-icon:hover {
+    color: #b71c1c;
+}
+
+.empty-schede {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* --- Form Styles (Moved from formModificaUtente) --- */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--primary-navy);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    font-family: 'Jost', sans-serif;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-green);
+    box-shadow: 0 0 5px rgba(46, 175, 69, 0.2);
+}

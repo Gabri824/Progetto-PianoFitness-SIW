@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>PianoFitness - Dashboard Admin</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="dashboard-topbar">
+        <div class="dashboard-logo">
+            <a th:href="@{/}">
+                <img th:src="@{/images/Logo.png}" alt="PianoFitness Logo">
+            </a>
+        </div>
+        <a th:href="@{/}" class="btn-home">TORNA ALLA HOME</a>
+    </div>
+
+    <div class="dashboard-container">
+
+        <div class="section-header">
+            <h1>Pannello di Controllo</h1>
+            <p class="section-subtitle">Panoramica completa del sistema</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-value" th:text="${totalUtenti}">0</span>
+                <span class="stat-label">Utenti Registrati</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" th:text="${totalAdmin}">0</span>
+                <span class="stat-label">Amministratori</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" th:text="${totalSchede}">0</span>
+                <span class="stat-label">Schede Totali</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" th:text="${totalEsercizi}">0</span>
+                <span class="stat-label">Esercizi Totali</span>
+            </div>
+        </div>
+
+        <!-- Admin Actions -->
+        <div class="section-header">
+            <h2>Gestione</h2>
+        </div>
+
+        <div class="admin-actions">
+            <a th:href="@{/admin/utenti}" class="btn-action">
+                <i class="fas fa-users"></i> Gestione Utenti
+            </a>
+            <!-- Placeholder for other management actions if needed later -->
+        </div>
+
+    </div>
+</body>
+
+</html>
